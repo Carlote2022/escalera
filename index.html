@@ -445,6 +445,84 @@
   .cta-incluye { font-size: 13px; color: #5A7A8A; margin-top: 22px; line-height: 2; }
   .cta-garantia-nota { font-size: 12.5px; color: #446070; margin-top: 14px; }
 
+  /* ── MANUAL BONUS ────────────────────────────── */
+  .manual-bonus {
+    background: var(--azul-mid);
+    position: relative;
+    overflow: hidden;
+  }
+  .manual-bonus::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 90% 60% at 50% 100%, rgba(201,168,76,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .manual-bonus .cont { position: relative; }
+  .manual-bonus .eyebrow { color: var(--oro); }
+  .manual-bonus h2 { color: white; }
+  .manual-bonus p { color: #B0C4D4; }
+
+  .manual-bonus-caja {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.30);
+    border-left: 4px solid var(--oro);
+    padding: 32px 32px 28px;
+    margin: 32px 0;
+  }
+  .manual-bonus-caja p {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-style: italic;
+    color: white;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .manual-bonus-lista {
+    list-style: none;
+    margin: 28px 0 8px;
+  }
+  .manual-bonus-lista li {
+    font-size: 16px;
+    padding: 11px 0 11px 28px;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    color: #B0C4D4;
+    line-height: 1.55;
+  }
+  .manual-bonus-lista li::before {
+    content: "◇";
+    position: absolute;
+    left: 0;
+    color: var(--oro);
+    font-size: 11px;
+    top: 14px;
+  }
+
+  .manual-bonus-nota {
+    margin-top: 28px;
+    padding: 18px 24px;
+    background: rgba(0,0,0,0.20);
+    border-radius: 2px;
+    font-size: 14px;
+    color: #7899AA;
+    line-height: 1.7;
+  }
+  .manual-bonus-nota strong { color: var(--oro-claro); }
+
+  .manual-bonus-gratis {
+    display: inline-block;
+    background: var(--oro);
+    color: var(--azul);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    margin-bottom: 6px;
+  }
+
   /* ── FOOTER ──────────────────────────────────── */
   footer {
     text-align: center;
@@ -593,6 +671,34 @@
         Quiero la Escalera Descendente
         <span class="btn-subtexto">USD 9 · Descarga inmediata · Garantía 7 días</span>
       </a>
+    </div>
+  </div>
+</div>
+
+<!-- MANUAL BONUS -->
+<div class="manual-bonus">
+  <div class="cont">
+    <div class="manual-bonus-gratis">Incluido · Sin costo adicional</div>
+    <div class="eyebrow">Próximamente · Para todos los compradores</div>
+    <div class="linea-oro"></div>
+    <h2>El Manual de La Escalera Descendente</h2>
+
+    <p>Todos los compradores de este pack recibirán, en los próximos 30 días, el ebook completo del sistema: la versión compilada y ampliada de todo el taller en un único documento de referencia permanente.</p>
+
+    <div class="manual-bonus-caja">
+      <p>No es un resumen del material que ya tenés. Es el taller desarrollado en profundidad — con la misma voz, el mismo rigor, y el espacio que la forma larga permite.</p>
+    </div>
+
+    <ul class="manual-bonus-lista">
+      <li>Los doce elementos del sistema desarrollados con extensión de libro</li>
+      <li>Ejemplos literarios ampliados y nuevos análisis de obra</li>
+      <li>Guía, fichas y ejercicios integrados en un único documento</li>
+      <li>Formato PDF optimizado para lectura en pantalla e impresión</li>
+    </ul>
+
+    <div class="manual-bonus-nota">
+      El manual llegará directamente al email de tu compra en Hotmart.<br>
+      <strong>Sin pasos adicionales. Sin costo extra. Es parte de lo que te llevás.</strong>
     </div>
   </div>
 </div>

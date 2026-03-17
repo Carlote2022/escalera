@@ -4,398 +4,526 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>La Escalera Descendente — Carlos Peñalver Fenoy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --azul:       #0F2640;
+    --azul-mid:   #1A3A5C;
+    --oro:        #C9A84C;
+    --oro-claro:  #E2C06A;
+    --verde-cta:  #22A447;
+    --verde-hover:#1a8f3a;
+    --blanco:     #FAFAF8;
+    --gris-suave: #F2EFE8;
+    --gris-borde: #DDD8CE;
+    --texto:      #1C1C1C;
+    --texto-suave:#4A4A4A;
+  }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
 
   body {
-    font-family: Georgia, 'Times New Roman', serif;
-    color: #1C1C1C;
-    background: #FAFAF8;
+    font-family: 'Source Sans 3', Helvetica, sans-serif;
+    color: var(--texto);
+    background: var(--blanco);
     line-height: 1.7;
+    overflow-x: hidden;
   }
 
-  /* ── HERO ─────────────────────────────────────────────────── */
-  .hero {
-    background: #1A3A5C;
-    color: white;
-    padding: 72px 24px 60px;
+  /* ── BARRA DE URGENCIA ───────────────────────── */
+  .urgencia-bar {
+    background: var(--oro);
     text-align: center;
+    padding: 11px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--azul);
+    letter-spacing: 0.2px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .urgencia-bar span { opacity: 0.7; font-weight: 400; }
+
+  /* ── HERO ────────────────────────────────────── */
+  .hero {
+    background: var(--azul);
+    color: white;
+    padding: 80px 24px 72px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 70%);
+    pointer-events: none;
   }
   .hero-eyebrow {
-    font-family: Helvetica, Arial, sans-serif;
     font-size: 11px;
-    letter-spacing: 3px;
+    letter-spacing: 3.5px;
     text-transform: uppercase;
-    color: #C9A84C;
-    margin-bottom: 20px;
+    color: var(--oro);
+    margin-bottom: 22px;
+    font-weight: 600;
   }
   .hero h1 {
-    font-size: clamp(36px, 6vw, 58px);
-    font-weight: bold;
-    line-height: 1.15;
-    margin-bottom: 16px;
-    letter-spacing: -0.5px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(38px, 6vw, 62px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 8px;
   }
-  .hero-sub {
-    font-size: clamp(16px, 2.5vw, 21px);
+  .hero-tagline {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(18px, 2.8vw, 24px);
     font-style: italic;
-    color: #C9A84C;
-    margin-bottom: 28px;
-    max-width: 680px;
+    color: var(--oro-claro);
+    margin-bottom: 32px;
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    line-height: 1.45;
   }
   .hero-desc {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 15px;
-    color: #B8C8D8;
-    max-width: 560px;
-    margin: 0 auto 40px;
-    line-height: 1.6;
-  }
-  .btn-primary {
-    display: inline-block;
-    background: #C9A84C;
-    color: #1A3A5C;
-    font-family: Helvetica, Arial, sans-serif;
-    font-weight: bold;
     font-size: 16px;
-    padding: 16px 40px;
+    color: #B0C4D4;
+    max-width: 520px;
+    margin: 0 auto 44px;
+    line-height: 1.75;
+  }
+  .hero-micro {
+    margin-top: 18px;
+    font-size: 13px;
+    color: #7899AA;
+    line-height: 1.9;
+  }
+  .hero-micro strong { color: #9ABBC8; }
+
+  /* ── BOTÓN VERDE ─────────────────────────────── */
+  .btn-verde {
+    display: inline-block;
+    background: var(--verde-cta);
+    color: white;
+    font-family: 'Source Sans 3', Helvetica, sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 18px 44px;
     border-radius: 3px;
     text-decoration: none;
-    letter-spacing: 0.5px;
-    transition: background 0.2s;
+    letter-spacing: 0.3px;
+    transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
+    box-shadow: 0 4px 18px rgba(34,164,71,0.35);
+    line-height: 1.3;
   }
-  .btn-primary:hover { background: #E0C070; }
-  .hero-price {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    color: #8AAABB;
-    margin-top: 14px;
+  .btn-verde:hover {
+    background: var(--verde-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(34,164,71,0.45);
+  }
+  .btn-verde:active {
+    transform: translateY(0);
+  }
+  .btn-subtexto {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 5px;
+    opacity: 0.85;
   }
 
-  /* ── SECTIONS ────────────────────────────────────────────── */
-  .section {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 60px 24px;
+  /* ── PROOF STRIP ─────────────────────────────── */
+  .proof-strip {
+    background: var(--gris-suave);
+    border-top: 1px solid var(--gris-borde);
+    border-bottom: 1px solid var(--gris-borde);
+    padding: 18px 24px;
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+    letter-spacing: 0.2px;
   }
-  .section + .section {
-    border-top: 1px solid #E8E4DC;
-  }
-  .section-alt {
-    background: #F0EDE6;
-  }
-  .section-dark {
-    background: #1A3A5C;
-    color: white;
-  }
-  .section-dark .section { color: white; }
+  .proof-strip strong { color: var(--azul-mid); }
+
+  /* ── CONTENEDOR ──────────────────────────────── */
+  .cont { max-width: 740px; margin: 0 auto; padding: 64px 24px; }
+
+  /* ── SECCIONES ───────────────────────────────── */
+  .s-alt  { background: var(--gris-suave); }
+  .s-dark { background: var(--azul); }
+  .s-dark .cont { color: white; }
+  .s-dark h2 { color: white; }
+  .s-dark p  { color: #B0C4D4; }
 
   .eyebrow {
-    font-family: Helvetica, Arial, sans-serif;
     font-size: 10px;
-    letter-spacing: 3px;
+    letter-spacing: 3.5px;
     text-transform: uppercase;
-    color: #C9A84C;
+    color: var(--oro);
     margin-bottom: 12px;
+    font-weight: 700;
   }
-  h2 {
-    font-size: clamp(24px, 4vw, 34px);
-    color: #1A3A5C;
-    line-height: 1.25;
-    margin-bottom: 20px;
-  }
-  .section-dark h2 { color: white; }
-
-  p {
-    font-size: 17px;
-    margin-bottom: 18px;
-    color: #2C2C2C;
-  }
-  .section-dark p { color: #C8D8E8; }
-
-  /* ── GOLD RULE ───────────────────────────────────────────── */
-  .gold-rule {
-    width: 48px;
-    height: 3px;
-    background: #C9A84C;
+  .linea-oro {
+    width: 44px; height: 3px;
+    background: var(--oro);
     margin-bottom: 24px;
   }
 
-  /* ── PROBLEMA ────────────────────────────────────────────── */
-  .problema-list {
-    list-style: none;
-    margin: 24px 0;
+  h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(24px, 4vw, 34px);
+    color: var(--azul);
+    line-height: 1.25;
+    margin-bottom: 22px;
+    font-weight: 700;
   }
-  .problema-list li {
+  p {
     font-size: 17px;
-    padding: 10px 0 10px 28px;
-    position: relative;
-    border-bottom: 1px solid #E0DAD0;
-    color: #2C2C2C;
+    margin-bottom: 18px;
+    color: var(--texto-suave);
+    line-height: 1.75;
   }
-  .problema-list li::before {
+
+  /* ── PROBLEMA ────────────────────────────────── */
+  .problema-hl {
+    background: white;
+    border-left: 4px solid var(--oro);
+    padding: 32px 32px 24px;
+    margin: 32px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .problema-hl p {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18.5px;
+    font-style: italic;
+    color: var(--azul);
+    margin-bottom: 14px;
+    line-height: 1.7;
+  }
+  .problema-hl p:last-child { margin: 0; }
+
+  .lista-prob {
+    list-style: none;
+    margin: 28px 0;
+  }
+  .lista-prob li {
+    font-size: 16.5px;
+    padding: 11px 0 11px 28px;
+    position: relative;
+    border-bottom: 1px solid var(--gris-borde);
+    color: var(--texto-suave);
+  }
+  .lista-prob li::before {
     content: "—";
     position: absolute;
     left: 0;
-    color: #C9A84C;
-    font-weight: bold;
+    color: var(--oro);
+    font-weight: 700;
   }
 
-  /* ── SISTEMA ─────────────────────────────────────────────── */
+  /* ── ESCALERA GRID ───────────────────────────── */
   .escalera-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(138px, 1fr));
     gap: 8px;
     margin: 28px 0;
   }
   .escalera-item {
     background: white;
     border: 1px solid #DDD;
-    border-left: 3px solid #C9A84C;
+    border-left: 3px solid var(--oro);
     padding: 10px 12px;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    color: #1A3A5C;
+    font-size: 13px;
+    color: var(--azul-mid);
   }
   .escalera-item span {
     display: block;
     font-size: 10px;
-    color: #C9A84C;
-    font-weight: bold;
+    color: var(--oro);
+    font-weight: 700;
     margin-bottom: 3px;
+    letter-spacing: 1px;
   }
 
-  /* ── PACK ────────────────────────────────────────────────── */
+  /* ── CITA ────────────────────────────────────── */
+  .cita {
+    border-left: 4px solid var(--oro);
+    padding: 22px 28px;
+    background: white;
+    margin: 36px 0;
+  }
+  .cita p {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 19px;
+    font-style: italic;
+    color: var(--azul);
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  /* ── PACK ────────────────────────────────────── */
   .pack-item {
     background: white;
-    border: 1px solid #E0DAD0;
-    border-top: 4px solid #1A3A5C;
+    border: 1px solid var(--gris-borde);
+    border-top: 4px solid var(--azul-mid);
     padding: 28px 28px 24px;
     margin-bottom: 16px;
+    transition: box-shadow 0.18s;
   }
+  .pack-item:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
   .pack-num {
-    font-family: Helvetica, Arial, sans-serif;
     font-size: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #C9A84C;
+    color: var(--oro);
     margin-bottom: 6px;
+    font-weight: 700;
   }
   .pack-title {
+    font-family: 'Playfair Display', Georgia, serif;
     font-size: 20px;
-    font-weight: bold;
-    color: #1A3A5C;
+    font-weight: 700;
+    color: var(--azul);
     margin-bottom: 4px;
   }
   .pack-sub {
     font-style: italic;
-    font-size: 14px;
+    font-size: 13.5px;
     color: #888;
     margin-bottom: 12px;
   }
-  .pack-desc {
-    font-size: 15px;
-    color: #444;
-    line-height: 1.6;
-    margin: 0;
+  .pack-desc { font-size: 15px; color: #555; line-height: 1.65; margin: 0; }
+
+  /* ── VALOR STRIP ─────────────────────────────── */
+  .valor-strip {
+    background: var(--azul);
+    padding: 22px 32px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .valor-strip-txt { font-size: 14px; color: #B0C4D4; }
+  .valor-strip-precio {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--oro);
+  }
+  .valor-strip-precio small {
+    font-size: 13px;
+    font-weight: 400;
+    color: #7899AA;
+    margin-left: 8px;
+    font-family: 'Source Sans 3', sans-serif;
   }
 
-  /* ── PARA QUIÉN ──────────────────────────────────────────── */
+  /* ── CTA INTERMEDIO ──────────────────────────── */
+  .cta-mid {
+    text-align: center;
+    padding: 44px 0 8px;
+  }
+
+  /* ── PARA QUIÉN ──────────────────────────────── */
   .doble-col {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 24px;
-    margin-top: 24px;
+    margin-top: 28px;
   }
-  @media (max-width: 580px) {
-    .doble-col { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 580px) { .doble-col { grid-template-columns: 1fr; } }
   .check-block h3 {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 14px;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+    font-weight: 700;
   }
-  .check-block.si h3 { color: #1A3A5C; }
-  .check-block.no h3 { color: #999; }
-  .check-list {
-    list-style: none;
-  }
+  .check-block.si h3 { color: var(--azul-mid); }
+  .check-block.no h3 { color: #AAA; }
+  .check-list { list-style: none; }
   .check-list li {
-    font-size: 15px;
-    padding: 7px 0 7px 26px;
+    font-size: 15.5px;
+    padding: 8px 0 8px 26px;
     position: relative;
     border-bottom: 1px solid #EEE;
     color: #333;
+    line-height: 1.5;
   }
-  .check-list li::before {
-    position: absolute;
-    left: 0;
-    font-weight: bold;
-  }
-  .check-block.si .check-list li::before {
-    content: "✓";
-    color: #1A3A5C;
-  }
-  .check-block.no .check-list li::before {
-    content: "✗";
-    color: #CCC;
-  }
+  .check-list li::before { position: absolute; left: 0; font-weight: 700; }
+  .check-block.si .check-list li::before { content: "✓"; color: var(--verde-cta); }
+  .check-block.no .check-list li::before { content: "✗"; color: #CCC; }
 
-  /* ── QUOTE ───────────────────────────────────────────────── */
-  .quote-block {
-    border-left: 4px solid #C9A84C;
-    padding: 20px 24px;
-    background: white;
-    margin: 32px 0;
-  }
-  .quote-block p {
-    font-size: 19px;
-    font-style: italic;
-    color: #1A3A5C;
-    margin: 0;
-  }
-
-  /* ── AUTOR ───────────────────────────────────────────────── */
-  .autor-block {
-    display: flex;
-    gap: 28px;
-    align-items: flex-start;
-  }
-  .autor-initial {
+  /* ── AUTOR ───────────────────────────────────── */
+  .autor-wrap { display: flex; gap: 28px; align-items: flex-start; }
+  .autor-inicial {
     flex-shrink: 0;
-    width: 72px;
-    height: 72px;
-    background: #1A3A5C;
+    width: 72px; height: 72px;
+    background: var(--azul);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 26px;
-    font-weight: bold;
-    color: #C9A84C;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--oro);
   }
   .autor-text h3 {
+    font-family: 'Playfair Display', Georgia, serif;
     font-size: 20px;
-    color: #1A3A5C;
+    color: var(--azul);
     margin-bottom: 4px;
   }
-  .autor-text .autor-role {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    color: #C9A84C;
-    letter-spacing: 1px;
+  .autor-role {
+    font-size: 11px;
+    color: var(--oro);
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
+    font-weight: 700;
   }
-  .autor-text p {
-    font-size: 16px;
-    color: #444;
-    margin-bottom: 12px;
-  }
+  .autor-text p { font-size: 16px; color: #555; margin-bottom: 12px; }
 
-  /* ── CTA FINAL ───────────────────────────────────────────── */
-  .cta-box {
+  /* ── GARANTÍA ────────────────────────────────── */
+  .garantia {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: #F0EDE6;
+    border: 1px solid var(--gris-borde);
+    padding: 28px;
+    margin-top: 32px;
+  }
+  .garantia-icon { font-size: 36px; flex-shrink: 0; line-height: 1; color: var(--azul-mid); }
+  .garantia-titulo { font-weight: 700; font-size: 15px; color: var(--azul-mid); margin-bottom: 5px; }
+  .garantia-desc { font-size: 14px; color: #666; line-height: 1.6; margin: 0; }
+
+  /* ── FAQ ─────────────────────────────────────── */
+  .faq-item { border-bottom: 1px solid var(--gris-borde); padding: 20px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-weight: 700; font-size: 16px; color: var(--azul-mid); margin-bottom: 8px; }
+  .faq-a { font-size: 15.5px; color: #555; line-height: 1.65; margin: 0; }
+
+  /* ── CTA FINAL ───────────────────────────────── */
+  .cta-final {
+    background: var(--azul);
     text-align: center;
-    padding: 60px 24px;
-    background: #1A3A5C;
+    padding: 80px 24px 72px;
+    position: relative;
+    overflow: hidden;
   }
-  .cta-box h2 {
-    color: white;
-    font-size: clamp(26px, 4vw, 38px);
-    margin-bottom: 12px;
+  .cta-final::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(201,168,76,0.1) 0%, transparent 70%);
+    pointer-events: none;
   }
-  .cta-box .cta-sub {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 15px;
-    color: #8AAABB;
-    margin-bottom: 8px;
+  .cta-final .eyebrow { color: var(--oro); }
+  .cta-final h2 { color: white; font-size: clamp(26px, 4vw, 38px); margin-bottom: 10px; }
+  .cta-sub { font-size: 15px; color: #7899AA; margin-bottom: 8px; }
+  .cta-precio-etiqueta {
+    font-size: 11px; letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--oro); opacity: 0.8; margin-bottom: 4px;
   }
-  .cta-price {
-    font-size: 42px;
-    font-weight: bold;
-    color: #C9A84C;
-    font-family: Helvetica, Arial, sans-serif;
-    margin: 16px 0 8px;
+  .cta-precio {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 58px; font-weight: 900;
+    color: var(--oro); line-height: 1;
+    margin: 12px 0 4px;
   }
-  .cta-price-note {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    color: #8AAABB;
-    margin-bottom: 32px;
-  }
-  .cta-includes {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    color: #7899AA;
-    margin-top: 18px;
-    line-height: 1.8;
-  }
+  .cta-precio-nota { font-size: 13px; color: #5A7A8A; margin-bottom: 36px; }
+  .cta-incluye { font-size: 13px; color: #5A7A8A; margin-top: 22px; line-height: 2; }
+  .cta-garantia-nota { font-size: 12.5px; color: #446070; margin-top: 14px; }
 
-  /* ── FOOTER ──────────────────────────────────────────────── */
+  /* ── FOOTER ──────────────────────────────────── */
   footer {
     text-align: center;
-    padding: 24px;
-    font-family: Helvetica, Arial, sans-serif;
+    padding: 26px;
     font-size: 12px;
-    color: #AAA;
-    background: #111E2B;
+    color: #888;
+    background: #0A1A28;
+    line-height: 1.8;
   }
 </style>
 </head>
 <body>
 
-<!-- ── HERO ──────────────────────────────────────────────────────────────── -->
+<!-- BARRA DE URGENCIA -->
+<div class="urgencia-bar">
+  🟢 Precio de lanzamiento: USD 9 &nbsp;·&nbsp; Acceso inmediato &nbsp;·&nbsp; <span>Garantía incondicional de 7 días</span>
+</div>
+
+<!-- HERO -->
 <div class="hero">
   <div class="hero-eyebrow">Carlos Peñalver Fenoy · Taller de ficción literaria</div>
   <h1>La Escalera Descendente</h1>
-  <div class="hero-sub">Un sistema para construir tu novela desde la primera idea hasta el último punto.</div>
+  <div class="hero-tagline">Tenés la historia. Te falta el sistema para terminarla.</div>
   <div class="hero-desc">
-    Doce elementos. Tres módulos. Cuatro materiales de trabajo diseñados para escritores que ya saben que quieren escribir una novela y necesitan saber cómo.
+    Doce elementos que organizan lo que ya sabés sobre tu novela y te muestran el paso que viene. No es teoría abstracta: es el mapa que te falta para llegar al final.
   </div>
-  <a href="#comprar" class="btn-primary">Obtener el pack completo</a>
-  <div class="hero-price">USD 9 · Descarga inmediata · Acceso de por vida</div>
+
+  <a href="https://pay.hotmart.com/W104815654B?off=6yifrxwh&hotfeature=51" class="btn-verde">
+    Acceder al sistema — USD 9
+    <span class="btn-subtexto">Descarga inmediata · 4 materiales en PDF · Acceso de por vida</span>
+  </a>
+
+  <div class="hero-micro">
+    <strong>Pago único.</strong> Sin suscripción. Sin renovaciones.<br>
+    Garantía incondicional de 7 días · Si no es lo que esperabas, te devolvemos el dinero.
+  </div>
 </div>
 
-<!-- ── PROBLEMA ───────────────────────────────────────────────────────────── -->
-<div class="section">
-  <div class="eyebrow">El problema</div>
-  <div class="gold-rule"></div>
-  <h2>Escribir una novela sin sistema es empezar a construir sin plano.</h2>
-  <p>
-    La mayoría de los escritores que llegan a un taller de novela tienen lo más difícil: una historia que los persigue. Lo que no tienen es una manera de convertir esa obsesión en trescientas páginas que funcionen.
-  </p>
-  <p>
-    El resultado es siempre el mismo: un comienzo prometedor, un nudo que se enreda, y un manuscrito abandonado en alguna carpeta del escritorio.
-  </p>
-  <ul class="problema-list">
-    <li>Confunden la historia con el argumento y construyen sobre arena.</li>
-    <li>Tienen personajes interesantes pero sin arco, sin deseo, sin conflicto real.</li>
-    <li>Escriben escenas que suenan bien pero no avanzan nada.</li>
-    <li>No saben qué está fallando porque no tienen vocabulario para nombrarlo.</li>
-    <li>Llegan al capítulo diez y no saben a dónde van.</li>
-  </ul>
-  <p>
-    No es un problema de talento. Es un problema de arquitectura.
-  </p>
+<!-- PROOF STRIP -->
+<div class="proof-strip">
+  <strong>Materiales de taller real</strong> · Desarrollados y testados con escritores en formación · 4 piezas en PDF · Acceso de por vida
 </div>
 
-<!-- ── SOLUCIÓN ───────────────────────────────────────────────────────────── -->
-<div class="section-alt">
-  <div class="section">
+<!-- PROBLEMA -->
+<div>
+  <div class="cont">
+    <div class="eyebrow">El problema</div>
+    <div class="linea-oro"></div>
+    <h2>Escribir una novela sin sistema es empezar a construir sin plano.</h2>
+
+    <div class="problema-hl">
+      <p>Empezaste la novela. Llegaste a cierto punto y algo se trabó. Quizás fue el nudo, quizás perdiste la voz del narrador, quizás la historia se ramificó en demasiadas direcciones y no encontrás el hilo.</p>
+      <p>Leés mucho. Sabés reconocer cuando una novela funciona. Pero cuando te sentás frente a la tuya, falta algo que no es talento ni tiempo: es vocabulario técnico para entender qué está roto y cómo arreglarlo.</p>
+    </div>
+
+    <p>La mayoría de los escritores que llegan a un taller de novela tienen lo más difícil: una historia que los persigue. Lo que no tienen es una manera de convertir esa obsesión en trescientas páginas que funcionen.</p>
+    <p>El resultado es siempre el mismo: un comienzo prometedor, un nudo que se enreda, y un manuscrito abandonado en alguna carpeta del escritorio.</p>
+
+    <ul class="lista-prob">
+      <li>Confunden la historia con el argumento y construyen sobre arena.</li>
+      <li>Tienen personajes interesantes pero sin arco, sin deseo, sin conflicto real.</li>
+      <li>Escriben escenas que suenan bien pero no avanzan nada.</li>
+      <li>No saben qué está fallando porque no tienen vocabulario para nombrarlo.</li>
+      <li>Llegan al capítulo diez y no saben a dónde van.</li>
+    </ul>
+
+    <p>No es un problema de talento. Es un problema de arquitectura.</p>
+  </div>
+</div>
+
+<!-- SOLUCIÓN -->
+<div class="s-alt">
+  <div class="cont">
     <div class="eyebrow">El sistema</div>
-    <div class="gold-rule"></div>
+    <div class="linea-oro"></div>
     <h2>La Escalera Descendente: doce elementos, en el orden en que importan.</h2>
-    <p>
-      Después de años impartiendo talleres de novela literaria, llegué a una conclusión: los escritores no necesitan más información sobre narrativa. Necesitan un sistema que les diga en qué orden trabajar esa información.
-    </p>
-    <p>
-      La Escalera Descendente organiza los doce elementos fundamentales de la novela en una secuencia pedagógica donde cada elemento depende del anterior y habilita al siguiente. No es una escalera que sube ni que baja: es una escalera que <em>profundiza</em>.
-    </p>
+
+    <p>Después de años impartiendo talleres de novela literaria, llegué a una conclusión: los escritores no necesitan más información sobre narrativa. Necesitan un sistema que les diga en qué orden trabajar esa información.</p>
+    <p>La Escalera Descendente organiza los doce elementos fundamentales de la novela en una secuencia pedagógica donde cada elemento depende del anterior y habilita al siguiente. No es una escalera que sube ni que baja: es una escalera que <em>profundiza</em>.</p>
 
     <div class="escalera-grid">
       <div class="escalera-item"><span>01</span>Historia</div>
@@ -412,76 +540,80 @@
       <div class="escalera-item"><span>12</span>Tema</div>
     </div>
 
-    <div class="quote-block">
+    <div class="cita">
       <p>"Si la semilla está hueca, no importa cuánto riegues. La historia es la pregunta que una novela se hace a sí misma antes de saber que existe."</p>
     </div>
 
-    <p>
-      Cada elemento está trabajado desde la práctica de taller: con definición propia, el error más común, el ejemplo literario más revelador, la pregunta que abre la escritura, y el ejercicio que la pone en movimiento.
-    </p>
+    <p>Cada elemento está trabajado desde la práctica de taller: con definición propia, el error más común, el ejemplo literario más revelador, la pregunta que abre la escritura, y el ejercicio que la pone en movimiento.</p>
   </div>
 </div>
 
-<!-- ── PACK ───────────────────────────────────────────────────────────────── -->
-<div class="section">
-  <div class="eyebrow">Qué incluye</div>
-  <div class="gold-rule"></div>
-  <h2>Cuatro materiales. Un sistema completo.</h2>
+<!-- PACK -->
+<div>
+  <div class="cont">
+    <div class="eyebrow">Qué incluye</div>
+    <div class="linea-oro"></div>
+    <h2>Cuatro materiales. Un sistema completo.</h2>
 
-  <div class="pack-item">
-    <div class="pack-num">Pieza 01 · Guía conceptual</div>
-    <div class="pack-title">La Guía de la Escalera Descendente</div>
-    <div class="pack-sub">El documento central del sistema</div>
-    <p class="pack-desc">
-      Veinticinco páginas que desarrollan los doce elementos con voz de taller: definición, error más frecuente, ejemplo literario analizado, pregunta al escritor, conexión con el resto de la escalera, y ejercicio central. El texto que explica el sistema antes de trabajarlo.
-    </p>
-  </div>
+    <div class="pack-item">
+      <div class="pack-num">Pieza 01 · Guía conceptual</div>
+      <div class="pack-title">La Guía de la Escalera Descendente</div>
+      <div class="pack-sub">El documento central del sistema</div>
+      <p class="pack-desc">Veinticinco páginas que desarrollan los doce elementos con voz de taller: definición, error más frecuente, ejemplo literario analizado, pregunta al escritor y ejercicio central. El documento que explica el sistema antes de trabajarlo.</p>
+    </div>
 
-  <div class="pack-item">
-    <div class="pack-num">Pieza 02 · Fichas de clase</div>
-    <div class="pack-title">Las 12 Fichas de la Escalera</div>
-    <div class="pack-sub">El corazón del taller, en formato imprimible</div>
-    <p class="pack-desc">
-      Una ficha por elemento. Diseño profesional en PDF con la escalera completa en el margen lateral, cuatro secciones por ficha —concepto clave, ejemplo literario, ejercicio práctico, pregunta de cierre— y pie de módulo. Para trabajar en clase, en pantalla, o impresas en la mesa de escritura.
-    </p>
-  </div>
+    <div class="pack-item">
+      <div class="pack-num">Pieza 02 · Fichas de clase</div>
+      <div class="pack-title">Las 12 Fichas de la Escalera</div>
+      <div class="pack-sub">El corazón del taller, en formato imprimible</div>
+      <p class="pack-desc">Una ficha por elemento. Diseño profesional en PDF con cuatro secciones: concepto clave, ejemplo literario, ejercicio práctico y pregunta de cierre. Para trabajar en pantalla, en clase, o impresas en la mesa de escritura.</p>
+    </div>
 
-  <div class="pack-item">
-    <div class="pack-num">Pieza 03 · Cuaderno de trabajo</div>
-    <div class="pack-title">Cuaderno de Ejercicios</div>
-    <div class="pack-sub">El espacio donde la teoría se convierte en escritura</div>
-    <p class="pack-desc">
-      Doce unidades de trabajo con tres instancias cada una: dos ejercicios estructurados y una práctica extendida —El momento de ensayar— con espacio de escritura incluido. Pensado para usarlo a mano o como guía visual en pantalla. Sin orden obligatorio: podés ir directamente al elemento que tu novela necesita ahora.
-    </p>
-  </div>
+    <div class="pack-item">
+      <div class="pack-num">Pieza 03 · Cuaderno de trabajo</div>
+      <div class="pack-title">Cuaderno de Ejercicios</div>
+      <div class="pack-sub">El espacio donde la teoría se convierte en escritura</div>
+      <p class="pack-desc">Doce unidades con tres instancias cada una: dos ejercicios estructurados y una práctica extendida con espacio de escritura incluido. Sin orden obligatorio: podés ir directo al elemento que tu novela necesita ahora.</p>
+    </div>
 
-  <div class="pack-item">
-    <div class="pack-num">Pieza 04 · Bonus académico</div>
-    <div class="pack-title">Bibliografía Comentada</div>
-    <div class="pack-sub">22 fuentes literarias y teóricas con comentario pedagógico</div>
-    <p class="pack-desc">
-      Diez textos literarios y doce textos teóricos referenciados en APA 7.ª edición, cada uno con comentario propio sobre por qué se usa en el taller y qué elemento de la escalera ilumina. Incluye índice cruzado por elemento y tabla de lecturas de iniciación según el perfil del lector.
-    </p>
+    <div class="pack-item">
+      <div class="pack-num">Pieza 04 · Bonus académico</div>
+      <div class="pack-title">Bibliografía Comentada</div>
+      <div class="pack-sub">22 fuentes literarias y teóricas con comentario pedagógico</div>
+      <p class="pack-desc">Veintidós fuentes con comentario propio sobre por qué se usa en el taller y qué elemento de la escalera ilumina. Incluye índice cruzado por elemento y tabla de lecturas según el perfil del lector.</p>
+    </div>
+
+    <div class="valor-strip">
+      <div class="valor-strip-txt">Pack completo · 4 materiales · Acceso de por vida</div>
+      <div class="valor-strip-precio">USD 9 <small>precio de lanzamiento</small></div>
+    </div>
+
+    <div class="cta-mid">
+      <a href="https://pay.hotmart.com/W104815654B?off=6yifrxwh&hotfeature=51" class="btn-verde">
+        Quiero la Escalera Descendente
+        <span class="btn-subtexto">USD 9 · Descarga inmediata · Garantía 7 días</span>
+      </a>
+    </div>
   </div>
 </div>
 
-<!-- ── PARA QUIÉN ──────────────────────────────────────────────────────────── -->
-<div class="section-alt">
-  <div class="section">
+<!-- PARA QUIÉN -->
+<div class="s-alt">
+  <div class="cont">
     <div class="eyebrow">Para quién es</div>
-    <div class="gold-rule"></div>
+    <div class="linea-oro"></div>
     <h2>Este pack es para escritores que ya decidieron escribir su novela.</h2>
 
     <div class="doble-col">
       <div class="check-block si">
         <h3>Es para vos si</h3>
         <ul class="check-list">
-          <li>Participás o participaste en talleres literarios</li>
-          <li>Tenés una historia en mente pero no sabés cómo estructurarla</li>
-          <li>Empezaste una novela y se trabó en el nudo</li>
-          <li>Leés mucho pero necesitás vocabulario técnico para tu propia escritura</li>
+          <li>Empezaste una novela y se trabó en algún punto del nudo</li>
+          <li>Tenés una historia en la cabeza pero no podés estructurarla</li>
+          <li>Leés mucho y necesitás vocabulario técnico para tu propia escritura</li>
+          <li>Participaste de talleres literarios</li>
           <li>Querés trabajar de forma autónoma, con un sistema claro</li>
-          <li>Enseñás escritura creativa y buscás materiales para tu taller</li>
+          <li>Enseñás escritura creativa y buscás materiales pedagógicos sólidos</li>
         </ul>
       </div>
       <div class="check-block no">
@@ -489,7 +621,7 @@
         <ul class="check-list">
           <li>Buscás una fórmula que escriba la novela por vos</li>
           <li>Nunca leíste ficción literaria y no tenés intención de empezar</li>
-          <li>Querés escribir novela de género con fórmulas comerciales estrictas</li>
+          <li>Querés novela de género con fórmulas comerciales estrictas</li>
           <li>Esperás resultados sin práctica sostenida</li>
         </ul>
       </div>
@@ -497,43 +629,84 @@
   </div>
 </div>
 
-<!-- ── AUTOR ───────────────────────────────────────────────────────────────── -->
-<div class="section">
-  <div class="eyebrow">Sobre el autor</div>
-  <div class="gold-rule"></div>
-  <div class="autor-block">
-    <div class="autor-initial">CP</div>
-    <div class="autor-text">
-      <h3>Carlos Peñalver Fenoy</h3>
-      <div class="autor-role">Docente de escritura literaria · Tallerista de novela</div>
-      <p>
-        Durante años he impartido talleres de novela literaria ficcional, acompañando a escritores en el proceso de construir sus primeras novelas y en la revisión de las que ya estaban a mitad de camino.
-      </p>
-      <p>
-        La Escalera Descendente no es un sistema que diseñé en el papel: es el destilado de lo que funciona en el aula. Los doce elementos, en ese orden, porque es el orden en que los problemas aparecen y en que las soluciones se vuelven posibles.
-      </p>
-      <p>
-        Este pack es el taller en formato autónomo: para quienes no pueden asistir en persona, para quienes quieren tener los materiales como referencia permanente, y para docentes que buscan una estructura pedagógica sólida para su propio taller.
-      </p>
+<!-- AUTOR -->
+<div>
+  <div class="cont">
+    <div class="eyebrow">Sobre el autor</div>
+    <div class="linea-oro"></div>
+    <div class="autor-wrap">
+      <div class="autor-inicial">CP</div>
+      <div class="autor-text">
+        <h3>Carlos Peñalver Fenoy</h3>
+        <div class="autor-role">Docente de escritura literaria · Tallerista de novela</div>
+        <p>Docente de escritura literaria y autor de la novela <em>Diamantes no tienen fin</em>. Durante años impartió talleres de ficción literaria acompañando a escritores en el proceso de construir sus primeras novelas y en la revisión de las que ya estaban a mitad de camino.</p>
+        <p>La Escalera Descendente no es un sistema diseñado en el papel: es el destilado de lo que funciona en el aula. Los doce elementos, en ese orden, porque es el orden en que los problemas aparecen y en que las soluciones se vuelven posibles.</p>
+        <p>Este pack es el taller en formato autónomo: para quienes no pueden asistir en persona, para quienes quieren tener los materiales como referencia permanente, y para docentes que buscan una estructura pedagógica sólida para su propio taller.</p>
+
+        <div class="garantia">
+          <div class="garantia-icon">◇</div>
+          <div>
+            <div class="garantia-titulo">Garantía incondicional de 7 días</div>
+            <p class="garantia-desc">Si el material no es lo que esperabas, devolvemos el dinero sin preguntas dentro de los siete días posteriores a la compra.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ── CTA ────────────────────────────────────────────────────────────────── -->
-<div class="cta-box" id="comprar">
-  <div class="eyebrow" style="color:#C9A84C;">Descarga inmediata</div>
-  <h2>La Escalera Descendente</h2>
-  <div class="cta-sub">Pack completo · 4 materiales · Acceso de por vida</div>
-  <div class="cta-price">USD 9</div>
-  <div class="cta-price-note">Pago único. Sin suscripción. Sin renovaciones.</div>
-  <a href="https://go.hotmart.com/W104815654B" class="btn-primary" target="_blank" rel="noopener noreferrer">Obtener el pack ahora</a>
-  <div class="cta-includes">
-    Guía conceptual (25 pp.) &nbsp;·&nbsp; 12 Fichas de clase (PDF imprimible)<br>
-    Cuaderno de ejercicios &nbsp;·&nbsp; Bibliografía comentada APA 7
+<!-- FAQ -->
+<div class="s-alt">
+  <div class="cont">
+    <div class="eyebrow">Preguntas frecuentes</div>
+    <div class="linea-oro"></div>
+    <h2>Lo que suelen preguntar antes de comprar.</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">¿Necesito tener una novela empezada para aprovechar estos materiales?</div>
+      <p class="faq-a">No. El sistema funciona tanto si ya empezaste como si solo tenés una idea inicial. Las herramientas acompañan todo el proceso: desde la primera intuición hasta la organización completa de la trama.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿Este material sirve para cuentos o solo para novela?</div>
+      <p class="faq-a">Está diseñado exclusivamente para la novela. Los doce elementos responden a la escala y las exigencias específicas de la forma larga. Para el cuento, hay lógicas distintas.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿Cómo accedo después de comprar?</div>
+      <p class="faq-a">Recibís el acceso por email de forma inmediata. Podés descargar los materiales en cualquier dispositivo y usarlos sin conexión.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿Hay alguna suscripción o pago adicional?</div>
+      <p class="faq-a">No. Es un pago único de USD 9. Sin suscripción, sin renovaciones, sin costos ocultos. Acceso de por vida a los materiales.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿Cómo funciona la garantía?</div>
+      <p class="faq-a">Tenés 7 días para pedir el reembolso completo sin dar explicaciones. Es incondicional. Si no es lo que esperabas, te devolvemos el dinero.</p>
+    </div>
   </div>
 </div>
 
-<!-- ── FOOTER ─────────────────────────────────────────────────────────────── -->
+<!-- CTA FINAL -->
+<div class="cta-final" id="comprar">
+  <div class="eyebrow">Acceso inmediato</div>
+  <h2>La Escalera Descendente</h2>
+  <div class="cta-sub">Pack completo · 4 materiales · Acceso de por vida</div>
+  <div class="cta-precio-etiqueta">precio de lanzamiento</div>
+  <div class="cta-precio">USD 9</div>
+  <div class="cta-precio-nota">Pago único. Sin suscripción. Sin renovaciones.</div>
+
+  <a href="https://pay.hotmart.com/W104815654B?off=6yifrxwh&hotfeature=51" class="btn-verde" style="font-size:18px; padding:20px 52px;">
+    Quiero la Escalera Descendente
+    <span class="btn-subtexto">Descarga inmediata · Todos los materiales en PDF · Garantía 7 días</span>
+  </a>
+
+  <div class="cta-incluye">
+    Guía conceptual (25 pp.) &nbsp;·&nbsp; 12 Fichas de clase (PDF imprimible)<br>
+    Cuaderno de ejercicios &nbsp;·&nbsp; Bibliografía comentada APA 7
+  </div>
+  <div class="cta-garantia-nota">Garantía incondicional de 7 días · Si no es lo que esperabas, te devolvemos el dinero.</div>
+</div>
+
+<!-- FOOTER -->
 <footer>
   © 2026 Carlos Peñalver Fenoy · La Escalera Descendente · Todos los derechos reservados<br>
   Queda prohibida la reproducción total o parcial de estos materiales sin autorización expresa del autor.
